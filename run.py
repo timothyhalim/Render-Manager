@@ -2,11 +2,8 @@ import sys
 import os
 import traceback
 
-try:
-    from db import db
-    from gui import main
-except Exception as e: 
-    print(traceback.format_exc())
+from db import db
+from gui import main
 
 
 dbpath = os.path.join(os.path.abspath(__file__), "..", "RenderManager.db")
@@ -19,8 +16,8 @@ class RenderManager():
         self.app.setStyle("Fusion")
         self.wind = main.UserInterface()
         
-        self.db = db.db(dbpath)
-        self.init_db()
+        # self.db = db.db(dbpath)
+        # self.init_db()
 
     def init_db(self):
         self.db.table_create('jobs', keys={
@@ -40,10 +37,10 @@ class RenderManager():
         self.app.exec_()
 
 if __name__ == '__main__':
-    try:
-        app = RenderManager(sys.argv)
-        app.run()
+    # try:
+    app = RenderManager(sys.argv)
+    app.run()
         
-    except Exception as e: 
-        print(traceback.format_exc())
-input("Press Enter to continue...")
+    # except Exception as e: 
+    #     print(traceback.format_exc())
+    #     input("Press Enter to continue...")
