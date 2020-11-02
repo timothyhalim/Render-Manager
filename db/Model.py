@@ -3,6 +3,8 @@ import os
 import peewee as pw
 import datetime
 
+from . import Utils
+
 db = pw.DatabaseProxy()
 
 class BaseModel(pw.Model):
@@ -63,9 +65,9 @@ class Job(BaseModel):
         frame_left = len(self.frame_left())
         clients = len(self.clients())
         if clients == 0:
-            return avg * frame_left
+            return Utils.convert_second(avg * frame_left)
         else:
-            return avg * frame_left / clients
+            return Utils.convert_second(avg * frame_left / clients)
 
 class Frame(BaseModel):
     job = pw.ForeignKeyField(Job)

@@ -1,6 +1,6 @@
-from PySide2.QtGui import *
-from PySide2.QtCore import *
-from PySide2.QtWidgets import *
+from PySide2.QtGui import QStandardItemModel, QStandardItem
+from PySide2.QtCore import Qt
+from PySide2.QtWidgets import QLineEdit, QCompleter
 
 class SearchBar(QLineEdit):
     def __init__(self, parent=None, placeholder="", completerContents=[]):

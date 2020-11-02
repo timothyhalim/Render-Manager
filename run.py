@@ -2,34 +2,26 @@ import sys
 import os
 import traceback
 
-from db import db
-from gui import main
-
-
-dbpath = os.path.join(os.path.abspath(__file__), "..", "RenderManager.db")
+from db import Controller
+from gui import Main
 
 class RenderManager():
     def __init__(self, *args):
         super(RenderManager, self).__init__()
         
-        self.app = main.QApplication()
+        self.app = Main.QApplication()
         self.app.setStyle("Fusion")
-        self.wind = main.UserInterface()
+        self.wind = Main.UserInterface()
         
-        # self.db = db.db(dbpath)
-        # self.init_db()
+        dbpath = os.path.join(os.path.abspath(__file__), "..", "RenderManager.db")
+        self.db = Controller.init(dbpath)
 
-    def init_db(self):
-        self.db.table_create('jobs', keys={
-            'id': ['INTEGER', 'PRIMARY KEY'],
-            'code': ['TEXT'],
-            'submitter': ['TEXT'],
-            'file': ['TEXT'],
-            'layer': ['TEXT'],
-            'weight': ['INTEGER'],
-            'info': ['TEXT'],
-        })
+        self.build_list()
         
+    def build_list(self):
+        jobs = Controller.get_all_job()
+        self.wind.build_job_list(jobs)
+
     def submit_job(self):
         pass
         

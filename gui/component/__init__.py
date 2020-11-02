@@ -1,2 +1,2 @@
-from .imageButton import ImageButton
-from .searchBar import SearchBar
+from .ImageButton import ImageButton
+from .SearchBar import SearchBar

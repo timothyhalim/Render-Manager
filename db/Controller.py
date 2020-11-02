@@ -5,6 +5,7 @@ from peewee import SqliteDatabase
 from .Model import db, User, Status, Job, Frame, Client, ClientTask
 from . import Utils
 
+# Init Connection
 
 def init(db_path):
     db.initialize(SqliteDatabase(db_path))
@@ -13,6 +14,8 @@ def init(db_path):
     for status in ("Idle", "Waiting For", "Ready", "Running", "Error", "Disabled", "Finished" ):
         create_status(status)
     return db
+
+# Create Record
 
 def create_user(name):
     return User.get_or_create(name=name)[0]
@@ -57,3 +60,28 @@ def assign_task(client, jobs):
     data =[{'client':client, 'job':job} for job in jobs]
     tasks = ClientTask.insert_many(data).execute()
     return tasks
+
+# Read
+
+def get_all_job():
+    return [job for job in Job.select()]
+
+def get_job(code="", id=""):
+    if code:
+        return Job.get(Job.code == code)
+    elif id:
+        return Job.get(Job.id == id)
+
+# Update
+
+def update_job(code="", id="", **kwargs):
+    job = get_job(code=code, id=id)
+    job.update(**kwargs)
+
+# Delete
+
+def delete_job(code="", id=""):
+    if code:
+        return Job.delete().where(Job.code == code)
+    elif id:
+        return Job.delete().where(Job.id == id)
