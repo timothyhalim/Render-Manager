@@ -10,7 +10,6 @@ class Chunk(QWidget):
         # self.update_color(rgb=(randint(0,255),randint(0,255),randint(0,255)))
         self.setAttribute(Qt.WA_StyledBackground, True)
         self.setToolTip(f"{frame.number}<br>{frame.status.name}")
-        print(frame.number)
         self.color = [
             (128,128,128), # Idle
             (50,50,255), # Waiting

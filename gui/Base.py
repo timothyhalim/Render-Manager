@@ -148,7 +148,7 @@ class UserInterface(QDialog):
         
         self.job_list_table.setRowCount(1)
         column_number = 0
-        for name, column_width in (("ID", 50), ("Date", 120),  ("Submitter", 150), ("File", 550), ("Layer", 100), ("Weight", 80),  ("Progress", 200), ("ETA", 150),  ("Workers", 80), ("Action", 80)):
+        for name, column_width in (("ID", 50), ("Date", 150),  ("Submitter", 150), ("File", 550), ("Layer", 100), ("Weight", 80),  ("Progress", 200), ("ETA", 120),  ("Workers", 80), ("Action", 80)):
             self.job_list_table.setHorizontalHeaderItem(column_number, QTableWidgetItem(name))
             self.job_list_table.setColumnWidth(column_number, column_width)
             column_number += 1

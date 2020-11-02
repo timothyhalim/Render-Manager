@@ -23,7 +23,13 @@ class RenderManager():
         self.wind.build_job_list(jobs)
 
     def submit_job(self):
-        pass
+        Controller.create_job( 
+            r"J:\UCG\Episodes\Scenes\EP100\SH002.00A\UCG_EP100_SH002.00A_CMP.nk", 
+            "WRITE_IMG", 
+            r"J:\UCG\UCG_Nuke10.bat", 
+            "renderNuke.py", 
+            frames=[i for i in range(100)]
+        )
         
     def run(self):
         self.app.exec_()
@@ -31,6 +37,7 @@ class RenderManager():
 if __name__ == '__main__':
     # try:
     app = RenderManager(sys.argv)
+    # app.submit_job()
     app.run()
         
     # except Exception as e: 

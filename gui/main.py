@@ -24,8 +24,8 @@ class UserInterface(Base.UserInterface):
         for job in jobs:
             row = job.id-1
             job_code = self.addCell(row, 0, job.code, alignment = [Qt.AlignVCenter | Qt.AlignRight])
-            submit_date = self.addCell(row, 1, job.submit_date.strftime("%y%m%d %H:%M:%S"), alignment = [Qt.AlignVCenter | Qt.AlignLeft])
-            submitter = self.addCell(row, 2, job.submitter.name, alignment = [Qt.AlignVCenter | Qt.AlignRight])
+            submit_date = self.addCell(row, 1, job.submit_date.strftime("%Y-%m-%d %H:%M:%S"), alignment = [Qt.AlignVCenter | Qt.AlignLeft])
+            submitter = self.addCell(row, 2, job.submitter.name, alignment = [Qt.AlignVCenter | Qt.AlignLeft])
             file_path = self.addCell(row, 3, job.file_path, 
                                         alignment = [Qt.AlignVCenter | Qt.AlignLeft], tooltip = job.file_path)
             layer = self.addCell(row, 4, job.layer, alignment = [Qt.AlignVCenter | Qt.AlignLeft])
