@@ -1,6 +1,4 @@
-from PySide2.QtGui import *
-from PySide2.QtCore import *
-from PySide2.QtWidgets import *
+from PySide2.QtGui import QBrush, QColor, QPalette, Qt
 
 
 Stylesheet = """
@@ -148,7 +146,7 @@ Stylesheet = """
     QTableWidget {
         border: 1px solid #282828;
         selection-background-color: #f7931e; 
-        selection-color: #BBB; 
+        selection-color: #FFF; 
         background-color:#333333; 
         alternate-background-color: #292929;
     }

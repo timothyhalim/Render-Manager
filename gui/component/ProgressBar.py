@@ -1,13 +1,16 @@
-from PySide2.QtGui import QColor
-
+from PySide2.QtGui import QColor, QPalette, Qt
 from PySide2.QtWidgets import QHBoxLayout, QLabel, QWidget
+
+from random import randint
 
 class Chunk(QWidget):
     def __init__(self, frame):
         super().__init__()
         self.setAutoFillBackground(True)
         # self.update_color(rgb=(randint(0,255),randint(0,255),randint(0,255)))
-        self.setToolTip(str(frame.number))
+        self.setAttribute(Qt.WA_StyledBackground, True)
+        self.setToolTip(f"{frame.number}<br>{frame.status.name}")
+        print(frame.number)
         self.color = [
             (128,128,128), # Idle
             (50,50,255), # Waiting
@@ -19,11 +22,8 @@ class Chunk(QWidget):
         ]
         self.update_color(self.color[frame.status.id-1])
 
-
     def update_color(self, rgb):
-        p = self.palette()
-        p.setColor(self.backgroundRole(), QColor(rgb[0], rgb[1], rgb[2]))
-        self.setPalette(p)
+        self.setStyleSheet(f'background-color: rgb({rgb[0]}, {rgb[1]}, {rgb[2]})')
 
 class ChunkBar(QWidget):
     def __init__(self, job, parent = None):

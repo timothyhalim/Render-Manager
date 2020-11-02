@@ -1,21 +1,21 @@
 import sys
 from random import randint
 
-from PySide2.QtGui import QColor, QPixmap, Qt
+from PySide2.QtGui import QColor, QPalette, Qt
+from PySide2.QtWidgets import QApplication, QDialog, QHBoxLayout, QLabel, QVBoxLayout, QWidget
 
-from PySide2.QtWidgets import QApplication, QHBoxLayout, QLabel, QStackedLayout, QVBoxLayout, QWidget
+from gui.QSS import Stylesheet, getNukePalette
 
 class Chunk(QWidget):
     def __init__(self, text=""):
         super().__init__()
         self.setAutoFillBackground(True)
         self.update_color(rgb=(randint(0,255),randint(0,255),randint(0,255)))
+        self.setAttribute(Qt.WA_StyledBackground, True)
         self.setToolTip(str(text))
 
     def update_color(self, rgb):
-        p = self.palette()
-        p.setColor(self.backgroundRole(), QColor(rgb[0], rgb[1], rgb[2]))
-        self.setPalette(p)
+        self.setStyleSheet(f'background-color: rgb({rgb[0]}, {rgb[1]}, {rgb[2]})')
 
 class ChunkBar(QWidget):
     def __init__(self, parent = None, chunks=200):
@@ -48,12 +48,21 @@ class CustomProgressBar(QWidget):
         self.layout.addWidget(self.statusLabel)
         self.layout.addWidget(self.bar)
         
+class Dialog(QDialog):
+    def __init__(self):
+        super().__init__()
+        self.setStyleSheet(Stylesheet)
+        self.setPalette(getNukePalette())
+        self.layout = QVBoxLayout(self)
+        self.layout.addWidget(CustomProgressBar())
         self.show()
+    
         
     
 if __name__ == '__main__':
     # try:
     app = QApplication(sys.argv)
-    w = CustomProgressBar()
+    app.setStyle("Fusion")
+    w = Dialog()
     app.exec_()
         
