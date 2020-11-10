@@ -72,11 +72,20 @@ def get_job(code="", id=""):
     elif id:
         return Job.get(Job.id == id)
 
+def get_host(name=Utils.get_host()):
+    return Client.get(Client.name == name)
+
 # Update
 
 def update_job(code="", id="", **kwargs):
     job = get_job(code=code, id=id)
-    job.update(**kwargs)
+    query = job.update(**kwargs)
+    query.execute()
+
+def update_host(name=Utils.get_host(), enabled=True):
+    host = get_host(name=name)
+    query = host.update(enabled=enabled)
+    query.execute()
 
 # Delete
 

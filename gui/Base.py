@@ -118,21 +118,6 @@ class UserInterface(QDialog):
         # Add to master layout
         self.job_master_layout.addLayout(self.job_action_layout)
         
-        # Signals
-        # self.stopButton.clicked.connect(self.stopRender)
-        # self.startButton.clicked.connect(self.startRender)
-        
-        # for button in (self.job_action_filter_waiting, 
-                       # self.job_action_filter_running, 
-                       # self.job_action_filter_disabled, 
-                       # self.job_action_filter_finished):
-            # button.stateChanged.connect(self.filterTable)
-            
-        # self.job_action_enable_button.clicked.connect(self.enableJobs)
-        # self.job_action_disable_button.clicked.connect(self.disableJobs)
-        # self.job_action_check_button.clicked.connect(self.checkJobs)
-        # self.job_action_reset_button.clicked.connect(self.resetJobs)
-        # self.job_action_delete_button.clicked.connect(self.deleteJobs)
         
     def setup_job_ui_list(self):
         # Add Table 
@@ -165,9 +150,6 @@ class UserInterface(QDialog):
         
         # Add to master layout
         self.job_master_layout.addLayout(self.job_list_layout)
-        
-        # Signals
-        # self.job_list_table.itemSelectionChanged.connect(self.rowSelected)
         
     def setup_settings_ui(self):
         self.settings_tab = QWidget()

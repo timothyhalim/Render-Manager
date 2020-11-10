@@ -8,6 +8,32 @@ class UserInterface(Base.UserInterface):
     def __init__(self):
         super().__init__()
 
+    def connect_signal(self, db):
+        self.db = db
+        # Signals
+        self.job_action_start_button.clicked.connect(self.start_render)
+        self.job_action_stop_button.clicked.connect(self.stop_render)
+        
+        # for button in (self.job_action_filter_waiting, 
+                       # self.job_action_filter_running, 
+                       # self.job_action_filter_disabled, 
+                       # self.job_action_filter_finished):
+            # button.stateChanged.connect(self.filterTable)
+            
+        # self.job_action_enable_button.clicked.connect(self.enableJobs)
+        # self.job_action_disable_button.clicked.connect(self.disableJobs)
+        # self.job_action_check_button.clicked.connect(self.checkJobs)
+        # self.job_action_reset_button.clicked.connect(self.resetJobs)
+        # self.job_action_delete_button.clicked.connect(self.deleteJobs)
+
+        self.job_list_table.itemSelectionChanged.connect(self.row_selected)
+
+    def start_render(self):
+        self.db.update_host(enabled=True)
+
+    def stop_render(self):
+        self.db.update_host(enabled=False)
+
     def addCell(self, row, col, content, alignment = [], tooltip = None):
         cell = QTableWidgetItem()
         cell.setText(str(content))
@@ -37,3 +63,25 @@ class UserInterface(Base.UserInterface):
             # actionCell = ActionCell(row)
             # self.job_list_table.setCellWidget(row, 6, actionCell)
             
+    def get_selected_row(self):
+        items = self.job_list_table.selectedIndexes()
+        rows = []
+        for item in items:
+            row = item.row()
+            if not row in rows:
+                rows.append(row)
+        return rows
+    
+    def row_selected(self):
+        selected_rows = self.get_selected_row()
+        if selected_rows:
+            if len(selected_rows) > 1:
+                print ("Multiple selected")
+            else:
+                print ("One selected")
+                id = self.job_list_table.item(selected_rows[0], 0).text()
+                print(id)
+                # for job in self.jobList:
+                #     if job.id == id:
+                #         self.jobPriorityControl.setValue(job.priority)
+                #         self.jobWorkerControl.setValue(job.workerCount)

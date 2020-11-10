@@ -17,6 +17,7 @@ class RenderManager():
         self.db = Controller.init(dbpath)
 
         self.build_list()
+        self.connect_signal()
         
     def build_list(self):
         jobs = Controller.get_all_job()
@@ -30,7 +31,10 @@ class RenderManager():
             "renderNuke.py", 
             frames=[i for i in range(100)]
         )
-        
+    
+    def connect_signal(self):
+        self.wind.connect_signal(Controller)
+
     def run(self):
         self.app.exec_()
 
